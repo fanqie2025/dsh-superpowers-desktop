@@ -5,6 +5,8 @@
 
 面向的宿主：DeepSeek Harness 桌面端（Electron），核心 `@deepseek-ai/dsh` **0.2.0-rc.2**，Windows。
 
+> 仓库：<https://github.com/fanqie2025/dsh-superpowers-desktop>
+
 ---
 
 ## 与第三方移植版（`@wenaixi/dsh-superpower`）的差异
@@ -64,7 +66,7 @@ $env:NODE_OPTIONS=''
 
 ```powershell
 dsh plugin --profile desktop add dsh-superpowers-desktop
-dsh plugin --profile desktop add github:<你>/dsh-superpowers-desktop
+dsh plugin --profile desktop add github:fanqie2025/dsh-superpowers-desktop
 ```
 
 **要求**：`@deepseek-ai/dsh-skill` 区间 `>=0.1.0-rc.1 <0.3.0-0`。桌面端核心 0.2.0-rc.2 落在区间内，

@@ -21,7 +21,8 @@
     }
   },
   "scripts": {
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "smoke": "node scripts/smoke.mjs"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
@@ -29,6 +30,14 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanqie2025/dsh-superpowers-desktop.git"
+  },
+  "homepage": "https://github.com/fanqie2025/dsh-superpowers-desktop#readme",
+  "bugs": {
+    "url": "https://github.com/fanqie2025/dsh-superpowers-desktop/issues"
   },
   "keywords": [
     "dsh",
