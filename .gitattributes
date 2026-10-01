@@ -1,0 +1,11 @@
+# 仓库内文本统一 LF；但 Windows 批处理必须 CRLF——
+# cmd.exe 处理 LF-only 批处理里的 goto/标签时行为不可靠，会静默跳过或报"找不到标签"。
+* text=auto eol=lf
+
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# 二进制（本仓库当前没有，留作约定）
+*.png binary
+*.ico binary
+*.webp binary

@@ -116,9 +116,13 @@ src/superpowers.js                  # 插件本体：SkillProvider + 极简 fron
 skills/<name>/SKILL.md              # 15 个技能
 skills/using-superpowers/references/dsh-tools.md   # 工具映射层（DSH ↔ 上游词汇）
 cordis.patch.yml                    # 挂载行
-scripts/verify.mjs                  # 结构 + 兼容性校验
+scripts/verify.mjs                  # 结构 + 兼容性校验（89 项检查）
+scripts/install-desktop.cmd         # 本机一键安装（自动清空 NODE_OPTIONS、检查宿主未运行）
+scripts/verify.cmd                  # 一键校验（自动找 node）
 docs/SKILL-TEMPLATE.md              # 技能写作规范（再同步时照它改）
 docs/UPSTREAM.md                    # 上游固定提交、逐技能移植范围与漂移说明
+AGENTS.md                           # 仓库不变式（给未来的维护者/智能体）
+CHANGELOG.md                        # 变更记录
 NOTICE                              # 上游 MIT 声明与署名
 ```
 
