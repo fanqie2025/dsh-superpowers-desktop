@@ -1,0 +1,43 @@
+{
+  "name": "dsh-superpowers-desktop",
+  "version": "1.0.0",
+  "description": "obra/superpowers 的 DeepSeek Harness 桌面端移植：15 个中文技能，以零依赖 SkillProvider 注入 ctx.skills，随 dsh.bundle 安装/卸载。",
+  "type": "module",
+  "main": "src/superpowers.js",
+  "files": [
+    "src/",
+    "skills/",
+    "scripts/",
+    "docs/",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "NOTICE",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "verify": "node scripts/verify.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-skill": ">=0.1.0-rc.1 <0.3.0-0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "superpowers",
+    "skills",
+    "agent",
+    "methodology"
+  ],
+  "license": "MIT"
+}

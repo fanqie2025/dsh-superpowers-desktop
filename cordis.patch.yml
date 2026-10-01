@@ -1,0 +1,15 @@
+# dsh-superpowers-desktop —— 挂载层
+#
+# package.json 声明了 dsh.bundle.patch 指向本文件；`dsh plugin --profile <name> add <本包>`
+# 会在安装时把本文件追加进 profile 的有序 bundle 列表，所以安装/卸载都不需要手工改配置。
+#
+# 想单独关掉某个 profile 里的它而不卸载，就在该 profile 自己的 cordis.patch.yml 里写：
+#
+#   - id: superpowers-desktop
+#     disabled: true
+#
+# 行 id 与包名刻意跟第三方的 @wenaixi/dsh-superpower（行 id `superpowers`）区分开，
+# 两者同时安装也不会撞 id；Provider 名同理（见 src/superpowers.js 的 DEFAULT_PROVIDER）。
+- insert:
+    - id: superpowers-desktop
+      name: "dsh-superpowers-desktop"
