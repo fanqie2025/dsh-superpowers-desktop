@@ -93,8 +93,14 @@ provider 名称、15 个候选项的 `rank`/`source`/`provider`/`invocation`/`lo
 逐个 `get()` 载入正文（无 frontmatter 残留）、伪造 locator 返回 `undefined` 而不抛错、
 `include`/`exclude`/`rank`/`skillDir` 配置生效、保留名 `runtime` 抛错、disposer 可调用。
 
-> 注：`smoke.mjs` 用的是**桩宿主**，证明的是插件自身逻辑与它对 API 的用法正确；
-> 真正的"能否被 dsh 挂载"仍取决于宿主的模块解析，只能在安装后实测。
+> 注：`smoke.mjs` 用的是**桩宿主**，证明的是插件自身逻辑与它对 API 的用法正确。
+
+> **本机实测（2026-10-01）——宿主挂载与按需载入均已验证。** 已以 `link:` 方式装入 `desktop` profile：
+> `dependencies` 里是 `"dsh-superpowers-desktop": "link:G:/家庭网络/DeepSeek Harness/dsh-superpowers"`，
+> `dsh.profile.bundles` 末尾追加同名条目。重启宿主后，**15 个技能全部出现在会话技能目录中**，
+> 且 `skill(name="using-superpowers")` 正确返回正文与资源基目录（`skills/using-superpowers`）。
+> 因为是 link 安装，改仓库里的文件无需重装即生效——技能正文每次加载都从磁盘读取。
+> 代价：仓库目录一旦移动或删除，profile 里的这一条就会失效。
 
 ## 配置
 
