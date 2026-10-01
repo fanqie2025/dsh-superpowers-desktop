@@ -31,11 +31,15 @@
 
 ## 三、常用动作
 
-**改完技能后自检**
+**改完技能或插件后自检**
 
 ```powershell
-node scripts/verify.mjs          # 或双击 scripts\verify.cmd（会用桌面端自带 runtime 的 node）
+node scripts/verify.mjs          # 结构 + peer 区间（或双击 scripts\verify.cmd）
+node scripts/smoke.mjs           # 桩宿主下真跑 apply → list → get
 ```
+
+改了 `src/superpowers.js` 时**两个都要跑**：`verify.mjs` 只管结构与不变式，
+它不会发现"provider 注册逻辑写坏了"这类问题——那是 `smoke.mjs` 的职责。
 
 **装到本机桌面端**（必须**先完全退出** DeepSeek Harness，否则 profile 的 `node_modules` 被锁）
 

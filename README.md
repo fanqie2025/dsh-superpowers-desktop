@@ -73,16 +73,26 @@ dsh plugin --profile desktop add github:<你>/dsh-superpowers-desktop
 ## 验证
 
 ```powershell
-node scripts/verify.mjs                                   # 默认按 dsh 0.2.0-rc.2 校验
+scripts\verify.cmd                                        # 一键（自动找 node）
+node scripts/verify.mjs                                   # 结构与兼容性，默认按 dsh 0.2.0-rc.2
 node scripts/verify.mjs --dsh-version 0.2.1-rc.1          # 换目标版本再校验
+node scripts/smoke.mjs                                    # 冒烟：真执行 apply → list → get
 ```
 
-它检查：`package.json` 与 `dsh.bundle.patch` 契约、bundle patch 文件内容、**运行时源码零第三方
-依赖**（扫 import 裸标识符）、peer 区间是否覆盖目标 dsh 版本、15 个技能是否齐全、每个
-`SKILL.md` 的 frontmatter 能否解析且 `name` 与目录一致、正文是否为空壳。
-
+**`verify.mjs`（89 项）** 检查：`package.json` 与 `dsh.bundle.patch` 契约、bundle patch 文件内容、
+**运行时源码零第三方依赖**（扫 import 裸标识符）、peer 区间是否覆盖目标 dsh 版本、15 个技能是否
+齐全、每个 `SKILL.md` 的 frontmatter 能否解析且 `name` 与目录一致、正文是否为空壳。
 校验器和运行时**共用同一份 frontmatter 解析器**（`src/superpowers.js` 导出），不会出现
 "校验通过、运行时不认"。
+
+**`smoke.mjs`（19 项）** 补上 `verify.mjs` 证明不了的那一环——**插件代码是否真的能跑**：
+它用一个符合 `@deepseek-ai/dsh-skill@0.2.0-rc.2` 契约的桩 ctx 调 `apply()`，再断言
+provider 名称、15 个候选项的 `rank`/`source`/`provider`/`invocation`/`locator`/`resourceBase`、
+逐个 `get()` 载入正文（无 frontmatter 残留）、伪造 locator 返回 `undefined` 而不抛错、
+`include`/`exclude`/`rank`/`skillDir` 配置生效、保留名 `runtime` 抛错、disposer 可调用。
+
+> 注：`smoke.mjs` 用的是**桩宿主**，证明的是插件自身逻辑与它对 API 的用法正确；
+> 真正的"能否被 dsh 挂载"仍取决于宿主的模块解析，只能在安装后实测。
 
 ## 配置
 
@@ -117,6 +127,7 @@ skills/<name>/SKILL.md              # 15 个技能
 skills/using-superpowers/references/dsh-tools.md   # 工具映射层（DSH ↔ 上游词汇）
 cordis.patch.yml                    # 挂载行
 scripts/verify.mjs                  # 结构 + 兼容性校验（89 项检查）
+scripts/smoke.mjs                   # 冒烟测试：桩宿主下真跑 apply/list/get（19 项）
 scripts/install-desktop.cmd         # 本机一键安装（自动清空 NODE_OPTIONS、检查宿主未运行）
 scripts/verify.cmd                  # 一键校验（自动找 node）
 docs/SKILL-TEMPLATE.md              # 技能写作规范（再同步时照它改）

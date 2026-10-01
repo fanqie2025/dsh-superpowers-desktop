@@ -17,7 +17,11 @@
 - 新增 `skills/using-superpowers/references/dsh-tools.md`：上游工具词汇（Claude Code）到本机
   真实工具的映射表，以及本机两个已知陷阱（`pwsh` 的 `0xC0000142`、`http_proxy` 伪造 502）。
 - 新增 `cordis.patch.yml`：随 `dsh.bundle` 自动挂载/卸载，行 id 与第三方包区分。
-- 新增 `scripts/verify.mjs`：结构 + peer 区间兼容性校验，复用运行时的 frontmatter 解析器。
+- 新增 `scripts/verify.mjs`：结构 + peer 区间兼容性校验（89 项），复用运行时的 frontmatter 解析器。
+- 新增 `scripts/smoke.mjs`：桩宿主冒烟测试（19 项），真正执行 `apply()` → `list()` → `get()`，
+  覆盖候选项字段、配置面（include/exclude/rank/skillDir/保留名）与卸载路径。
 - 新增 `scripts/install-desktop.cmd`、`scripts/verify.cmd`：本机一键安装/校验（自动清空
-  `NODE_OPTIONS`、自动找 runtime node）。
-- 新增 `docs/SKILL-TEMPLATE.md`（移植契约）与 `docs/UPSTREAM.md`（溯源与漂移说明）。
+  `NODE_OPTIONS`、自动找 runtime node；`.cmd` 由 `.gitattributes` 强制 CRLF）。
+- 新增 `.gitattributes`：仓库内 LF，`*.cmd` 强制 CRLF（cmd.exe 处理 LF-only 批处理的 `goto`/标签不可靠）。
+- 新增 `docs/SKILL-TEMPLATE.md`（移植契约）、`docs/UPSTREAM.md`（溯源与漂移说明）、
+  `AGENTS.md`（仓库不变式）。
